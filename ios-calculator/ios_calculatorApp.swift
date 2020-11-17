@@ -7,11 +7,12 @@
 
 import SwiftUI
 
+
 @main
 struct ios_calculatorApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CalculatorView()
         }
     }
 }

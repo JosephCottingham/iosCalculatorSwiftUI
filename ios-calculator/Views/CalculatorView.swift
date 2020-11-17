@@ -9,122 +9,20 @@ import SwiftUI
 
 
 
-class GlobalEnvironment: ObservableObject {
-    
-    @Published var display = ""
-    
-    var operation : buttonType?
-
-    func receiveInput(button:buttonType) {
-        switch button {
-            case buttonType.one:
-                if operation != nil && display != "" {
-                    display = String(operation(num1: Double(display)!, num2: Double(1), operation: operation!))
-                }
-            case buttonType.two:
-                if operation != nil && display != "" {
-                    display = String(operation(num1: Double(display)!, num2: Double(2), operation: operation!))
-                }
-            case buttonType.three:
-                if operation != nil && display != "" {
-                    display = String(operation(num1: Double(display)!, num2: Double(3), operation: operation!))
-                }
-            case buttonType.four:
-                if operation != nil && display != "" {
-                    display = String(operation(num1: Double(display)!, num2: Double(3), operation: operation!))
-                }
-            case buttonType.five:
-                if operation != nil && display != "" {
-                    display = String(operation(num1: Double(display)!, num2: Double(3), operation: operation!))
-                }
-            case buttonType.six:
-                if operation != nil && display != "" {
-                    display = String(operation(num1: Double(display)!, num2: Double(3), operation: operation!))
-                }
-            case buttonType.seven:
-                if operation != nil && display != "" {
-                    display = String(operation(num1: Double(display)!, num2: Double(3), operation: operation!))
-                }
-            case buttonType.eight:
-                if operation != nil && display != "" {
-                    display = String(operation(num1: Double(display)!, num2: Double(3), operation: operation!))
-                }
-            case buttonType.nine:
-                if operation != nil && display != "" {
-                    display = String(operation(num1: Double(display)!, num2: Double(3), operation: operation!))
-                }
-            case buttonType.zero:
-                if operation != nil && display != "" {
-                    display = String(operation(num1: Double(display)!, num2: Double(3), operation: operation!))
-                }
-            case buttonType.posNeg:
-                if display != "" {
-                    display = String(Double(display)! * -1)
-                }
-            case buttonType.percent:
-                if display != "" {
-                    display = String(Double(display)! / 100)
-                }
-            case buttonType.clear:
-                display = ""
-                operation = nil
-            default:
-                operation = button
-        }
-}
-    
-    func operation(num1:Double, num2:Double, operation:buttonType) -> Double{
-        switch operation {
-            case buttonType.divide:
-                return num1/num2
-            case buttonType.add:
-                return num1+num2
-            case buttonType.subtract:
-                return num1-num2
-            case buttonType.multiple:
-                return num1*num2
-            default:
-                return Double(0)
-        }
-    }
-
-    
-}
 
 
 
 
 
-enum buttonType {
-    case one
-    case two
-    case three
-    case four
-    case five
-    case six
-    case seven
-    case eight
-    case nine
-    case zero
-    case dec
-    case clear
-    case posNeg
-    case percent
-    case divide
-    case multiple
-    case subtract
-    case add
-    case equal
-}
 
 
 struct ContentView: View {
     
-    @EnvironmentObject var env: GlobalEnvironment
+    @Binding var env: Display
     
     var body: some View {
         VStack {
-            Text(env.display).font(.system(size: 80))
+            Text(env.displayValue).font(.system(size: 80))
               .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .bottomTrailing)
                 .padding(.trailing, 30).foregroundColor(.white)
             HStack (spacing: 10) {
