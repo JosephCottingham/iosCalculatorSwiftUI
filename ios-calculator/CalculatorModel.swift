@@ -12,5 +12,4 @@ class Display: ObservableObject {
     
     @Published var displayValue = ""
     
-    
 }

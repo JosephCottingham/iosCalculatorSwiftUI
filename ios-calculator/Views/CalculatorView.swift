@@ -8,26 +8,18 @@
 import SwiftUI
 
 
-
-
-
-
-
-
-
-
 struct ContentView: View {
     
-    @Binding var env: Display
+    @EnvironmentObject var controller: CalendarViewController
     
     var body: some View {
         VStack {
-            Text(env.displayValue).font(.system(size: 80))
+            Text(controller.displayValue).font(.system(size: 80))
               .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .bottomTrailing)
                 .padding(.trailing, 30).foregroundColor(.white)
             HStack (spacing: 10) {
                 Button(action: {
-                  print("Button pressed")
+                    controller.operationPress(buttonType: ButtonType.clear)
                 }, label: {
                     Text("AC").frame(width: 60, height: 60, alignment: .center)
                       .background(Color.gray)
@@ -36,7 +28,7 @@ struct ContentView: View {
                     .font(.title)
                 })
                 Button(action: {
-                  print("Button pressed")
+                    controller.operationPress(buttonType: ButtonType.posNeg)
                 }, label: {
                     Text("+/-").frame(width: 60, height: 60, alignment: .center)
                       .background(Color.gray)
@@ -45,7 +37,7 @@ struct ContentView: View {
                     .font(.title)
                 })
                 Button(action: {
-                  print("Button pressed")
+                    controller.operationPress(buttonType: ButtonType.percent)
                 }, label: {
                     Text("%").frame(width: 60, height: 60, alignment: .center)
                       .background(Color.gray)
@@ -54,7 +46,7 @@ struct ContentView: View {
                     .font(.title)
                 })
                 Button(action: {
-                  print("Button pressed")
+                    controller.operationPress(buttonType: ButtonType.divide)
                 }, label: {
                     Text("÷").frame(width: 60, height: 60, alignment: .center)
                       .background(Color.orange)
@@ -65,7 +57,7 @@ struct ContentView: View {
             }
             HStack (spacing: 10) {
                 Button(action: {
-                  print("Button pressed")
+                    controller.numberPress(buttonType: ButtonType.seven)
                 }, label: {
                     Text("7").frame(width: 60, height: 60, alignment: .center)
                       .background(Color.gray)
@@ -74,7 +66,7 @@ struct ContentView: View {
                     .font(.title)
                 })
                 Button(action: {
-                  print("Button pressed")
+                    controller.numberPress(buttonType: ButtonType.eight)
                 }, label: {
                     Text("8").frame(width: 60, height: 60, alignment: .center)
                       .background(Color.gray)
@@ -83,7 +75,7 @@ struct ContentView: View {
                     .font(.title)
                 })
                 Button(action: {
-                  print("Button pressed")
+                    controller.numberPress(buttonType: ButtonType.nine)
                 }, label: {
                     Text("9").frame(width: 60, height: 60, alignment: .center)
                       .background(Color.gray)
@@ -92,7 +84,7 @@ struct ContentView: View {
                     .font(.title)
                 })
                 Button(action: {
-                  print("Button pressed")
+                    controller.operationPress(buttonType: ButtonType.multiple)
                 }, label: {
                     Text("x").frame(width: 60, height: 60, alignment: .center)
                       .background(Color.orange)
@@ -103,7 +95,7 @@ struct ContentView: View {
             }
             HStack (spacing: 10) {
                 Button(action: {
-                  print("Button pressed")
+                    controller.numberPress(buttonType: ButtonType.four)
                 }, label: {
                     Text("4").frame(width: 60, height: 60, alignment: .center)
                       .background(Color.gray)
@@ -112,7 +104,7 @@ struct ContentView: View {
                     .font(.title)
                 })
                 Button(action: {
-                  print("Button pressed")
+                    controller.numberPress(buttonType: ButtonType.five)
                 }, label: {
                     Text("5").frame(width: 60, height: 60, alignment: .center)
                       .background(Color.gray)
@@ -121,7 +113,7 @@ struct ContentView: View {
                     .font(.title)
                 })
                 Button(action: {
-                  print("Button pressed")
+                    controller.numberPress(buttonType: ButtonType.six)
                 }, label: {
                     Text("6").frame(width: 60, height: 60, alignment: .center)
                       .background(Color.gray)
@@ -130,7 +122,7 @@ struct ContentView: View {
                     .font(.title)
                 })
                 Button(action: {
-                  print("Button pressed")
+                    controller.operationPress(buttonType: ButtonType.subtract)
                 }, label: {
                     Text("-").frame(width: 60, height: 60, alignment: .center)
                       .background(Color.orange)
@@ -141,7 +133,7 @@ struct ContentView: View {
             }
             HStack (spacing: 10) {
                 Button(action: {
-                  print("Button pressed")
+                    controller.numberPress(buttonType: ButtonType.one)
                 }, label: {
                     Text("1").frame(width: 60, height: 60, alignment: .center)
                       .background(Color.gray)
@@ -150,7 +142,7 @@ struct ContentView: View {
                     .font(.title)
                 })
                 Button(action: {
-                  print("Button pressed")
+                    controller.numberPress(buttonType: ButtonType.two)
                 }, label: {
                     Text("2").frame(width: 60, height: 60, alignment: .center)
                       .background(Color.gray)
@@ -159,7 +151,7 @@ struct ContentView: View {
                     .font(.title)
                 })
                 Button(action: {
-                  print("Button pressed")
+                    controller.numberPress(buttonType: ButtonType.three)
                 }, label: {
                     Text("3").frame(width: 60, height: 60, alignment: .center)
                       .background(Color.gray)
@@ -168,7 +160,7 @@ struct ContentView: View {
                     .font(.title)
                 })
                 Button(action: {
-                  print("Button pressed")
+                    controller.operationPress(buttonType: ButtonType.add)
                 }, label: {
                     Text("+").frame(width: 60, height: 60, alignment: .center)
                       .background(Color.orange)
@@ -179,7 +171,7 @@ struct ContentView: View {
             }
             HStack (spacing: 10) {
                 Button(action: {
-                  print("Button pressed")
+                    controller.numberPress(buttonType: ButtonType.zero)
                 }, label: {
                     Text("0").frame(width: 130, height: 60, alignment: .center)
                       .background(Color.gray)
@@ -188,7 +180,7 @@ struct ContentView: View {
                     .font(.title)
                 })
                 Button(action: {
-                  print("Button pressed")
+                    controller.numberPress(buttonType: ButtonType.dec)
                 }, label: {
                     Text(".").frame(width: 60, height: 60, alignment: .center)
                       .background(Color.gray)
@@ -197,7 +189,7 @@ struct ContentView: View {
                     .font(.title)
                 })
                 Button(action: {
-                  print("Button pressed")
+                    controller.operationPress(buttonType: ButtonType.equal)
                 }, label: {
                     Text("=").frame(width: 60, height: 60, alignment: .center)
                       .background(Color.orange)

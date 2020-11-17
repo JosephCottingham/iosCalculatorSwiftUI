@@ -12,7 +12,13 @@ import SwiftUI
 struct ios_calculatorApp: App {
     var body: some Scene {
         WindowGroup {
-            CalculatorView()
+            ContentView()
         }
+    }
+}
+
+struct ios_calculatorApp_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
     }
 }

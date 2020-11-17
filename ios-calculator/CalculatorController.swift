@@ -7,15 +7,20 @@
 
 import Foundation
 
-class CalendarViewController {
+class CalendarViewController : ObservableObject {
+    
+    @Published var displayValue = ""
     
     var numNew : Bool = true
     var numMode : Bool = false
     var operation : ButtonType?
-    var olderNumber : String
-    var newNumber : String
+    var olderNumber : String = ""
+    var newNumber : String = ""
+        
     
-
+    init() {
+    }
+    
     
     func numberPress(buttonType:ButtonType) {
         if self.numNew {
@@ -46,15 +51,15 @@ class CalendarViewController {
             
         case .posNeg:
             if self.numNew != true {
-                if self.newNumber[0:1] != "-" {
+                if self.newNumber.prefix(1) != "-" {
                     self.newNumber = String(format: "-%@", self.newNumber)
                 } else {
-                    self.newNumber = self.newNumber[1:]
+                    self.newNumber = String(self.newNumber.suffix(1))
                 }
             }
         case .percent:
             if self.numNew != true {
-                self.numNew = self.newNumber / 100
+                self.newNumber = String(Double(self.newNumber) ?? 0 / 100.00)
             }
         case .divide:
             self.operation = ButtonType.divide
@@ -76,13 +81,13 @@ class CalendarViewController {
     func equalsOperation() {
         switch self.operation {
         case .divide:
-            self.newNumber = String(Double(self.olderNumber) ?? 0 / Double(self.newNumber) ?? 0)
+            self.newNumber = String(Double(self.olderNumber)! / Double(self.newNumber)! )
         case .multiple:
-            self.newNumber = String(Double(self.olderNumber) ?? 0 * Double(self.newNumber) ?? 0)
+            self.newNumber = String(Double(self.olderNumber)! * Double(self.newNumber)! )
         case .subtract:
-            self.newNumber = String(Double(self.olderNumber) ?? 0 - Double(self.newNumber) ?? 0)
+            self.newNumber = String(Double(self.olderNumber)! - Double(self.newNumber)! )
         case .add:
-            self.newNumber = String(Double(self.olderNumber) ?? 0 + Double(self.newNumber) ?? 0)
+            self.newNumber = String(Double(self.olderNumber)! + Double(self.newNumber)! )
         default:
             return
             
@@ -96,6 +101,10 @@ class CalendarViewController {
             }
         }
         return true
+    }
+    
+    func setDisplay() {
+        self.displayValue = self.newNumber
     }
     
 }
