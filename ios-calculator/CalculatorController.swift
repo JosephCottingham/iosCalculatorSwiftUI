@@ -98,7 +98,7 @@ class CalendarViewController : ObservableObject {
             default:
                 return
         }
-        self.operation = nil
+        self.numNew = true
         self.displayValue = self.newNumber
     }
     
