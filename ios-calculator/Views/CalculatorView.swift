@@ -8,9 +8,10 @@
 import SwiftUI
 
 
-struct ContentView: View {
+struct CalculatorView: View {
     
     @EnvironmentObject var controller: CalendarViewController
+    
     
     var body: some View {
         VStack {
@@ -189,7 +190,7 @@ struct ContentView: View {
                     .font(.title)
                 })
                 Button(action: {
-                    controller.operationPress(buttonType: ButtonType.equal)
+                    controller.equalsOperation()
                 }, label: {
                     Text("=").frame(width: 60, height: 60, alignment: .center)
                       .background(Color.orange)
@@ -200,11 +201,5 @@ struct ContentView: View {
             }
         }.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .bottom).padding(.bottom,15).background(Color.black)
         
-    }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
     }
 }

@@ -6,38 +6,44 @@
 //
 
 import Foundation
+import SwiftUI
 
 class CalendarViewController : ObservableObject {
     
-    @Published var displayValue = ""
-    
-    var numNew : Bool = true
-    var numMode : Bool = false
-    var operation : ButtonType?
-    var olderNumber : String = ""
-    var newNumber : String = ""
+    @Published var displayValue = "0"
         
-    
+    var numNew : Bool = true
+    var numMode : Bool = true
+    var operation : ButtonType?
+    var olderNumber : String = "0"
+    var newNumber : String = ""
+
     init() {
     }
-    
-    
+
     func numberPress(buttonType:ButtonType) {
         if self.numNew {
             self.olderNumber = self.newNumber
             self.newNumber = ""
         }
-        if self.numMode {
+        if self.numMode == true {
             let tempNumVal = buttonType.getAssociatedNumValue()
-            if tempNumVal == "." && decAddValid(numberString: tempNumVal) != true{
+            if tempNumVal == "." && decAddValid(numberString: self.newNumber) != true{
                 return
             }
-            if self.numNew {
-                self.olderNumber = self.newNumber
-                self.newNumber = ""
-            }
             self.newNumber.append(tempNumVal)
+            self.numNew = false
         }
+        print("numNew:")
+        print(String(numNew))
+        print("numMode:")
+        print(String(numMode))
+        print("olderNumber: ")
+        print(self.olderNumber)
+        print("newNumber: ")
+        print(self.newNumber)
+        
+        self.displayValue = self.newNumber
     }
     
     func operationPress(buttonType:ButtonType) {
@@ -46,8 +52,8 @@ class CalendarViewController : ObservableObject {
             self.numNew = true
             self.numMode = true
             self.operation = nil
-            self.olderNumber = ""
-            self.newNumber = ""
+            self.olderNumber = "0"
+            self.newNumber = "0"
             
         case .posNeg:
             if self.numNew != true {
@@ -71,27 +77,29 @@ class CalendarViewController : ObservableObject {
             self.operation = ButtonType.subtract
             self.numNew = true
         case .add:
-            self.operation = ButtonType.subtract
+            self.operation = ButtonType.add
             self.numNew = true
         default:
             return
         }
+        self.displayValue = self.newNumber
     }
     
     func equalsOperation() {
         switch self.operation {
-        case .divide:
-            self.newNumber = String(Double(self.olderNumber)! / Double(self.newNumber)! )
-        case .multiple:
-            self.newNumber = String(Double(self.olderNumber)! * Double(self.newNumber)! )
-        case .subtract:
-            self.newNumber = String(Double(self.olderNumber)! - Double(self.newNumber)! )
-        case .add:
-            self.newNumber = String(Double(self.olderNumber)! + Double(self.newNumber)! )
-        default:
-            return
-            
+            case .divide:
+                self.newNumber = String(Double(self.olderNumber)! / Double(self.newNumber)! )
+            case .multiple:
+                self.newNumber = String(Double(self.olderNumber)! * Double(self.newNumber)! )
+            case .subtract:
+                self.newNumber = String(Double(self.olderNumber)! - Double(self.newNumber)! )
+            case .add:
+                self.newNumber = String(Double(self.olderNumber)! + Double(self.newNumber)! )
+            default:
+                return
         }
+        self.operation = nil
+        self.displayValue = self.newNumber
     }
     
     func decAddValid(numberString:String) -> Bool {
@@ -103,9 +111,6 @@ class CalendarViewController : ObservableObject {
         return true
     }
     
-    func setDisplay() {
-        self.displayValue = self.newNumber
-    }
     
 }
 
@@ -141,19 +146,19 @@ enum ButtonType {
       case .three:
         return "3"
       case .four:
-        return "1"
+        return "4"
       case .five:
-        return "2"
+        return "5"
       case .six:
-        return "3"
+        return "6"
       case .seven:
-        return "1"
+        return "7"
       case .eight:
-        return "2"
+        return "8"
       case .nine:
-        return "3"
+        return "9"
       case .zero:
-        return "2"
+        return "0"
       case .dec:
         return "."
     default:

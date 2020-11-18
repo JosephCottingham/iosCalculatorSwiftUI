@@ -10,15 +10,18 @@ import SwiftUI
 
 @main
 struct ios_calculatorApp: App {
+    @StateObject private var controller = CalendarViewController()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            CalculatorView().environmentObject(controller)
         }
     }
 }
 
 struct ios_calculatorApp_Previews: PreviewProvider {
+    static let controller = CalendarViewController()
     static var previews: some View {
-        ContentView()
+        CalculatorView().environmentObject(controller)
     }
 }

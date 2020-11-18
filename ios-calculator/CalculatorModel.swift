@@ -8,8 +8,8 @@
 import Foundation
 
 
-class Display: ObservableObject {
+class Model: ObservableObject {
     
-    @Published var displayValue = ""
+    @Published var displayValue = "0"
     
 }
